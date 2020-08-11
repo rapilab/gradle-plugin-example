@@ -103,6 +103,12 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
         val dexTask = project.tasks.create("dex", Dex::class.java)
         variantData.dexTask = dexTask
 
+        maybeCreateProguardTasks(variantData)
+    }
+
+    private fun maybeCreateProguardTasks(variantData: ApkVariantOutputData) {
+        val proguardTask = project.tasks.create("proguard", AndroidProGuardTask::class.java)
+        variantData.obfuscationTask = proguardTask
     }
 
     private fun createNdkTasks() {}
