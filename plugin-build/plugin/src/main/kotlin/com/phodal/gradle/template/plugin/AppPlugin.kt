@@ -11,7 +11,7 @@ import org.gradle.api.tasks.TaskContainer
 import org.gradle.tooling.provider.model.ToolingModelBuilderRegistry
 import javax.inject.Inject
 
-const val EXTENSION_NAME = "templateExampleConfig"
+const val EXTENSION_NAME = "phodalConfig"
 const val TASK_NAME = "Samples"
 
 abstract class AppPlugin : Plugin<Project> {

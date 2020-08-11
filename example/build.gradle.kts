@@ -3,6 +3,6 @@ plugins {
     id("com.phodal.gradle.template.plugin")
 }
 
-templateExampleConfig {
+phodalConfig {
     message.set("Just trying this gradle plugin...")
 }
