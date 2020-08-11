@@ -2,10 +2,16 @@ package com.phodal.gradle.template.plugin
 
 import com.phodal.gradle.template.plugin.internal.DependencyManager
 import com.phodal.gradle.template.plugin.internal.tasks.PackageApplication
+import com.phodal.gradle.template.plugin.internal.tasks.ProcessAndroidResources
+import com.phodal.gradle.template.plugin.internal.tasks.ShrinkResources
+import com.phodal.gradle.template.plugin.internal.tasks.TaskManager
+import com.phodal.gradle.template.plugin.internal.variant.ApkVariantOutputData
 import org.gradle.api.Project
 import org.gradle.api.tasks.TaskContainer
+import org.gradle.api.tasks.compile.JavaCompile
 
-class ApplicationTaskManager(val project: Project, dependencyManager: DependencyManager) {
+class ApplicationTaskManager(val project: Project, dependencyManager: DependencyManager) :
+    TaskManager {
     fun createMockableJarTask() {
 
     }
@@ -14,21 +20,27 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
 
     }
 
-    fun createTasksForVariantData(tasks: TaskContainer) {
+    fun createTasksForVariantData(
+        tasks: TaskContainer,
+        apkVariantOutputData: ApkVariantOutputData
+    ) {
         createAnchorTasks()
         createCheckManifestTask()
 
         createMergeAppManifestsTask()
         createGenerateResValuesTask()
         createRenderscriptTask()
+
         createMergeResourcesTask()
         createMergeAssetsTask()
+
         createBuildConfigTask()
         createPreprocessResourcesTask()
-        createProcessResTask()
+        createProcessResTask(apkVariantOutputData)
         createProcessJavaResTask()
         createAidlTask()
 
+        // compile java
         createJavaCompileTask()
         createJarTask()
         createPostCompilationTasks()
@@ -42,7 +54,7 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
         createSplitAbiTasks();
 
 
-        createPackagingTask(tasks)
+        createPackagingTask(tasks, apkVariantOutputData)
 
         handleMicroApp()
     }
@@ -56,10 +68,17 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
     private fun createMergeAssetsTask() {}
     private fun createBuildConfigTask() {}
     private fun createPreprocessResourcesTask() {}
-    private fun createProcessResTask() {}
+    private fun createProcessResTask(variantOutputData: ApkVariantOutputData) {
+        val processAndroidResources = project.tasks.create("processResources", ProcessAndroidResources::class.java)
+        variantOutputData.processResourcesTask = processAndroidResources
+    }
+
     private fun createProcessJavaResTask() {}
     private fun createAidlTask() {}
-    private fun createJavaCompileTask() {}
+    private fun createJavaCompileTask() {
+        val javaCompileTask = project.tasks.create("compileDebugJava", JavaCompile::class.java)
+    }
+
     private fun createJarTask() {}
 
     /**
@@ -73,13 +92,24 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
     private fun createPostCompilationTasks() {
 
     }
+
     private fun createNdkTasks() {}
 
     private fun createSplitAbiTasks() {}
     private fun createSplitResourcesTasks() {}
-    private fun createPackagingTask(tasks: TaskContainer) {
+    private fun createPackagingTask(
+        tasks: TaskContainer,
+        variantOutputData: ApkVariantOutputData
+    ) {
         val packageApp = project.tasks.create("package", PackageApplication::class.java)
-        packageApp.run {  }
+
+        packageApp.dependsOn(variantOutputData.processResourcesTask)
+
+        createShrinkResourcesTask(variantOutputData)
+    }
+
+    private fun createShrinkResourcesTask(variantOutputData: ApkVariantOutputData) {
+        project.tasks.create("shrinkResources", ShrinkResources::class.java);
     }
 
     /**

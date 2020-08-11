@@ -2,6 +2,7 @@ package com.phodal.gradle.template.plugin
 
 import com.phodal.gradle.template.plugin.internal.DependencyManager
 import com.phodal.gradle.template.plugin.internal.ExtraModelInfo
+import com.phodal.gradle.template.plugin.internal.variant.ApkVariantOutputData
 import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -96,7 +97,9 @@ abstract class AppPlugin : Plugin<Project> {
 
     private fun createTasksForVariantData(tasks: TaskContainer) {
         createAssembleTaskForVariantData(tasks)
-        taskManager.createTasksForVariantData(tasks)
+
+        val apkVariantOutputData = ApkVariantOutputData(taskManager);
+        taskManager.createTasksForVariantData(tasks, apkVariantOutputData)
     }
 
     private fun createAssembleTaskForVariantData(tasks: TaskContainer) {
