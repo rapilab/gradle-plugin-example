@@ -7,6 +7,7 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.compile.JavaCompile
+import org.gradle.util.Path
 import java.io.File
 
 class ApplicationTaskManager(val project: Project, dependencyManager: DependencyManager) :
@@ -119,8 +120,24 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
             proguardFiles
         }
 
+
+        // libraryJars: the runtime jars. Do this in doFirst since the boot classpath isn't
+        // available until the SDK is loaded in the prebuild task
+        proguardTask.doFirst {
+
+            //todo: remove this with really android.jar
+            proguardTask.libraryjars("libs/android.jar")
+            //            for (runtimeJar : getBootClasspathAsStrings()) {
+//        }
+        }
+
         proguardTask.injars("build/libs/example.jar")
         proguardTask.outjars("build/libs/classes.jar")
+    }
+
+    private fun getBootClasspathAsStrings(project: Project) {
+        project.configurations
+//        var classpath: List<String> = mutableListOf()
     }
 
     private fun createNdkTasks() {}

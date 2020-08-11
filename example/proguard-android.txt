@@ -1,7 +1,2 @@
-# This is a configuration file for ProGuard.
-# http://proguard.sourceforge.net/index.html#manual/usage.html
-
--dontobfuscate
--dontusemixedcaseclassnames
--dontskipnonpubliclibraryclasses
--verbose
+-keep public class com.google.vending.licensing.ILicensingService
+-keep public class com.android.vending.licensing.ILicensingService
