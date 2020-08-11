@@ -43,5 +43,6 @@ abstract class IncrementalTask: BaseTask() {
     protected fun doIncrementalTaskAction(changedInputs: MutableMap<File, FileStatus>) {
 
     }
+
     abstract fun doFullTaskAction()
 }

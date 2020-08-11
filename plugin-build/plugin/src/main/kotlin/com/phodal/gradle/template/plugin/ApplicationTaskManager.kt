@@ -6,8 +6,10 @@ import com.phodal.gradle.template.plugin.internal.tasks.ProcessAndroidResources
 import com.phodal.gradle.template.plugin.internal.tasks.ShrinkResources
 import com.phodal.gradle.template.plugin.internal.tasks.TaskManager
 import com.phodal.gradle.template.plugin.internal.variant.ApkVariantOutputData
+import groovy.transform.CompileDynamic
 import org.gradle.api.Project
 import org.gradle.api.Task
+import org.gradle.api.internal.ConventionMapping
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.compile.JavaCompile
 
@@ -121,13 +123,11 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
         val shrink = createShrinkResourcesTask(variantOutputData)
         packageApp.dependsOn(shrink)
 
+//        packageApp.convention
         var appTask: Task = packageApp
 
-
-//        println(appTask)
-
-        variantOutputData.assembleTask = createAssembleTask(variantOutputData)
-        variantOutputData.assembleTask!!.dependsOn(appTask)
+//        variantOutputData.assembleTask = createAssembleTask(variantOutputData)
+//        variantOutputData.assembleTask!!.dependsOn(appTask)
 
     }
 

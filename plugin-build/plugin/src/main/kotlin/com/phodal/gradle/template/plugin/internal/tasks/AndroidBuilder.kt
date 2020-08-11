@@ -5,4 +5,8 @@ class AndroidBuilder {
 
     }
 
+    fun processResources(aaptPackageCommandBuilder: AaptPackageProcessBuilder) {
+
+    }
+
 }

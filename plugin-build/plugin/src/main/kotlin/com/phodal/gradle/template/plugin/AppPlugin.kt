@@ -101,9 +101,7 @@ abstract class AppPlugin : Plugin<Project> {
     }
 
     private fun createTasksForVariantData(tasks: TaskContainer) {
-
         val apkVariantOutputData = ApkVariantOutputData(taskManager);
-
         createAssembleTaskForVariantData(tasks, apkVariantOutputData)
         taskManager.createTasksForVariantData(tasks, apkVariantOutputData)
     }
@@ -112,7 +110,7 @@ abstract class AppPlugin : Plugin<Project> {
         tasks: TaskContainer,
         variantOutputData: ApkVariantOutputData
     ) {
-//        taskManager.createAssembleTask(variantOutputData)
+        taskManager.createAssembleTask(variantOutputData)
     }
 
 }

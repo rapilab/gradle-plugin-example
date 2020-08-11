@@ -1,7 +1,16 @@
 package com.phodal.gradle.template.plugin.internal.tasks
 
-open class ProcessAndroidResources: IncrementalTask() {
-    override fun doFullTaskAction() {
+import org.gradle.api.tasks.Optional
+import org.gradle.api.tasks.OutputDirectory
+import java.io.File
 
+open class ProcessAndroidResources: IncrementalTask() {
+    @OutputDirectory
+    @Optional
+    val sourceOutputDir: File = File("dist")
+
+    override fun doFullTaskAction() {
+        val aaptPackageCommandBuilder = AaptPackageProcessBuilder(sourceOutputDir)
+        getBuilder()?.processResources(aaptPackageCommandBuilder)
     }
 }
