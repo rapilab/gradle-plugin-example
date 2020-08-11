@@ -25,6 +25,10 @@ abstract class AppPlugin : Plugin<Project> {
     @Inject
     constructor(registry: ToolingModelBuilderRegistry) {
         this.registry = registry
+        verifyRetirementAge()
+    }
+
+    private fun verifyRetirementAge() {
     }
 
     override fun apply(project: Project) {
@@ -52,6 +56,7 @@ abstract class AppPlugin : Plugin<Project> {
         project.apply { JavaBasePlugin::class.java }
 //        project.apply { JacocoPlugin::class.java }
 
+//        project.tasks.getByName("assemble").description = "Assembles all variants of all applications and secondary packages."
         project.gradle.buildFinished {
             // clear cache
         }
