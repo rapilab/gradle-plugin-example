@@ -1,5 +1,5 @@
 plugins {
-    java
+//    java
     id("com.phodal.gradle.template.plugin")
 }
 

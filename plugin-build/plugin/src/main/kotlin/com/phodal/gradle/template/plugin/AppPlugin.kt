@@ -7,7 +7,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaBasePlugin
 import org.gradle.api.plugins.JavaPlugin
-import org.gradle.testing.jacoco.plugins.JacocoPlugin
+import org.gradle.api.tasks.TaskContainer
 import org.gradle.tooling.provider.model.ToolingModelBuilderRegistry
 import javax.inject.Inject
 
@@ -65,7 +65,7 @@ abstract class AppPlugin : Plugin<Project> {
     private fun createExtension() {
         val dependencyManager = DependencyManager(project, extraModelInfo)
         taskManager = ApplicationTaskManager(project, dependencyManager)
-        val variantManager = VariantManager(project, taskManager)
+        variantManager = VariantManager(project, taskManager)
 
         val modelBuilder = ModelBuilder(taskManager, variantManager)
         registry.register(modelBuilder)
@@ -90,7 +90,19 @@ abstract class AppPlugin : Plugin<Project> {
     }
 
     private fun ensureTargetSetup() {
+        val tasks = project.tasks
+        println(".............................................")
+        println(tasks)
+        createTasksForVariantData(tasks)
+    }
 
+    private fun createTasksForVariantData(tasks: TaskContainer) {
+        createAssembleTaskForVariantData(tasks)
+        taskManager.createTasksForVariantData(tasks)
+    }
+
+    private fun createAssembleTaskForVariantData(tasks: TaskContainer) {
+        taskManager.createAssembleTask()
     }
 
 }
