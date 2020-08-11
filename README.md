@@ -1,90 +1,102 @@
-# kotlin-gradle-plugin-template 🐘
+# Android Gradle Plugin Research
 
-[![Use this template](https://img.shields.io/badge/-Use%20this%20template-brightgreen)](https://github.com/cortinico/kotlin-gradle-plugin-template/generate) [![Pre Merge Checks](https://github.com/cortinico/kotlin-gradle-plugin-template/workflows/Pre%20Merge%20Checks/badge.svg)](https://github.com/cortinico/kotlin-gradle-plugin-template/actions?query=workflow%3A%22Pre+Merge+Checks%22)  [![License](https://img.shields.io/github/license/cortinico/kotlin-android-template.svg)](LICENSE) ![Language](https://img.shields.io/github/languages/top/cortinico/kotlin-android-template?color=blue&logo=kotlin)
 
-A simple Github template that lets you create a **Gradle Plugin** 🐘 project using **100% Kotlin** and be up and running in a **few seconds**. 
+Android Gradle Plugin Code: [The Android Gradle Plugin](https://android.googlesource.com/platform/tools/base/+/studio-master-dev/build-system/README.md)
 
-This template is focused on delivering a project with **static analysis** and **continuous integration** already in place.
+## Process
 
-## How to use 👣
+1. used `com.android.application` or `com.android.library` in project
 
-Just click on [![Use this template](https://img.shields.io/badge/-Use%20this%20template-brightgreen)](https://github.com/cortinico/kotlin-gradle-plugin-template/generate) button to create a new repo starting from this template.
-
-Once created don't forget to update the:
-- [Plugin Coordinates](plugin-build/buildSrc/src/main/java/Coordinates.kt)
-- Plugin Usages (search for [com.ncorti.kotlin.gradle.template](https://github.com/cortinico/kotlin-gradle-plugin-template/search?q=com.ncorti.kotlin.gradle.template&unscoped_q=com.ncorti.kotlin.gradle.template) in the repo and replace it with your ID).
-
-## Features 🎨
-
-- **100% Kotlin-only template**.
-- Plugin build setup with **composite build**.
-- 100% Gradle Kotlin DSL setup.
-- Dependency versions managed via `buildSrc`.
-- CI Setup with GitHub Actions.
-- Kotlin Static Analysis via `ktlint` and `detekt`.
-- Publishing-ready to Gradle Portal.
-- Issues Template (bug report + feature request)
-- Pull Request Template.
-
-## Composite Build 📦
-
-This template is using a [Gradle composite build](https://docs.gradle.org/current/userguide/composite_builds.html) to build, test and publish the plugin. This means that you don't need to run Gradle twice to test the changes on your Gradle plugin (no more `publishToMavenLocal` tricks or so).
- 
-The included build is inside the [plugin-build](plugin-build) folder. 
-
-### `preMerge` task
-
-A `preMerge` task on the top level build is already provided in the template. This allows you to run all the `check` tasks both in the top level and in the included build.
-
-You can easily invoke it with:
-
-```
-./gradlew preMerge
+```groovy
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 ```
 
-If you need to invoke a task inside the included build with:
+2.
 
+
+## Documents
+
+### Application Build logs
+
+```bash
+Executing tasks: [assemble] in project /Users/fdhuang/works/fework/MyApplication
+
+Starting Gradle Daemon...
+Gradle Daemon started in 1 s 260 ms
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:compileDebugAidl NO-SOURCE
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :app:compileDebugRenderscript NO-SOURCE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:processDebugJavaRes NO-SOURCE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:compileDebugKotlin UP-TO-DATE
+> Task :app:compileDebugJavaWithJavac UP-TO-DATE
+> Task :app:compileDebugSources UP-TO-DATE
+> Task :app:mergeDebugJavaResource UP-TO-DATE
+> Task :app:dexBuilderDebug UP-TO-DATE
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeDebugNativeLibs UP-TO-DATE
+> Task :app:stripDebugDebugSymbols NO-SOURCE
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:preReleaseBuild UP-TO-DATE
+> Task :app:compileReleaseAidl NO-SOURCE
+> Task :app:compileReleaseRenderscript NO-SOURCE
+> Task :app:generateReleaseBuildConfig
+> Task :app:generateReleaseResValues
+> Task :app:generateReleaseResources
+> Task :app:createReleaseCompatibleScreenManifests
+> Task :app:extractDeepLinksRelease
+> Task :app:processReleaseManifest
+> Task :app:mergeReleaseResources
+> Task :app:processReleaseResources
+> Task :app:compileReleaseKotlin
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeDexDebug UP-TO-DATE
+> Task :app:packageDebug UP-TO-DATE
+> Task :app:assembleDebug UP-TO-DATE
+> Task :app:javaPreCompileRelease
+> Task :app:compileReleaseJavaWithJavac
+> Task :app:compileReleaseSources
+> Task :app:prepareLintJar
+> Task :app:checkReleaseDuplicateClasses
+> Task :app:lintVitalRelease
+> Task :app:dexBuilderRelease
+> Task :app:desugarReleaseFileDependencies
+> Task :app:mergeReleaseShaders
+> Task :app:compileReleaseShaders NO-SOURCE
+> Task :app:generateReleaseAssets UP-TO-DATE
+> Task :app:mergeReleaseAssets
+> Task :app:processReleaseJavaRes NO-SOURCE
+> Task :app:collectReleaseDependencies
+> Task :app:sdkReleaseDependencyData
+> Task :app:mergeReleaseJniLibFolders
+> Task :app:mergeReleaseJavaResource
+> Task :app:mergeReleaseNativeLibs
+> Task :app:stripReleaseDebugSymbols NO-SOURCE
+> Task :app:mergeExtDexRelease
+> Task :app:mergeDexRelease
+> Task :app:packageRelease
+> Task :app:assembleRelease
+> Task :app:assemble
+
+BUILD SUCCESSFUL in 1m 58s
+47 actionable tasks: 25 executed, 22 up-to-date
+
+Build Analyzer results available
 ```
-./gradlew -p plugin-build <task-name>
-```
-
-
-### Dependency substitution
-
-Please note that the project relies on module name/group in order for [dependency substitution](https://docs.gradle.org/current/userguide/resolution_rules.html#sec:dependency_substitution_rules) to work properly. If you change only the plugin ID everything will work as expected. If you change module name/group, things might break and you probably have to specify a [substitution rule](https://docs.gradle.org/current/userguide/resolution_rules.html#sub:project_to_module_substitution).
-
-
-## Publishing 🚀
-
-This template is ready to let you publish to [Gradle Portal](https://plugins.gradle.org/).
-
-The [![Publish Plugin to Portal](https://github.com/cortinico/kotlin-gradle-plugin-template/workflows/Publish%20Plugin%20to%20Portal/badge.svg?branch=1.0.0)](https://github.com/cortinico/kotlin-gradle-plugin-template/actions?query=workflow%3A%22Publish+Plugin+to+Portal%22) Github Action will take care of the publishing whenever you **push a tag**.
-
-Please note that you need to configure two secrets: `GRADLE_PUBLISH_KEY` and `GRADLE_PUBLISH_SECRET` with the credetials you can get from your profile on the Gradle Portal.
-
-## 100% Kotlin 🅺
-
-This template is designed to use Kotlin everywhere. The build files are written using [**Gradle Kotlin DSL**](https://docs.gradle.org/current/userguide/kotlin_dsl.html) as well as the [Plugin DSL](https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_block) to setup the build.
-
-Dependencies are centralized inside the [Dependencies.kt](buildSrc/src/main/java/Dependencies.kt) file in the `buildSrc` folder. Please note that there is another [Dependencies.kt](plugin-build/buildSrc/src/main/java/Dependencies.kt) inside the included build to keep the versions isolated.
-
-Moreover, a minimalistic Gradle Plugin is already provided in Kotlin to let you easily start developing your own around it.
-
-## Static Analysis 🔍
-
-This template is using [**ktlint**](https://github.com/pinterest/ktlint) with the [ktlint-gradle](https://github.com/jlleitschuh/ktlint-gradle) plugin to format your code. To reformat all the source code as well as the buildscript you can run the `ktlintFormat` gradle task.
-
-This template is also using [**detekt**](https://github.com/arturbosch/detekt) to analyze the source code, with the configuration that is stored in the [detekt.yml](config/detekt/detekt.yml) file (the file has been generated with the `detektGenerateConfig` task).
-
-## CI ⚙️
-
-This template is using [**GitHub Actions**](https://github.com/cortinico/kotlin-android-template/actions) as CI. You don't need to setup any external service and you should have a running CI once you start using this template.
-
-There are currently the following workflows available:
-- [Validate Gradle Wrapper](.github/workflows/gradle-wrapper-validation.yml) - Will check that the gradle wrapper has a valid checksum
-- [Pre Merge Checks](.github/workflows/pre-merge.yaml) - Will run the `preMerge` tasks as well as trying to run the Gradle plugin.
-- [Publish to Plugin Portal](.github/workflows/pre-merge.yaml) - Will run the `publishPlugin` task when pushing a new tag.
-
-## Contributing 🤝
-
-Feel free to open a issue or submit a pull request for any bugs/improvements.

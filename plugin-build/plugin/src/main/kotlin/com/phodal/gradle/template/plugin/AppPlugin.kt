@@ -1,5 +1,7 @@
 package com.phodal.gradle.template.plugin
 
+import com.phodal.gradle.template.plugin.internal.DependencyManager
+import com.phodal.gradle.template.plugin.internal.ExtraModelInfo
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaBasePlugin
