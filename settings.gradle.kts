@@ -6,7 +6,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = ("kotlin-gradle-plugin-template")
+rootProject.name = ("phodal-gradle-plugins")
 
 include(":example")
 includeBuild("plugin-build")
