@@ -1,6 +1,7 @@
 package com.phodal.gradle.template.plugin
 
 import com.phodal.gradle.template.plugin.internal.DependencyManager
+import com.phodal.gradle.template.plugin.internal.tasks.PackageApplication
 import org.gradle.api.Project
 import org.gradle.api.tasks.TaskContainer
 
