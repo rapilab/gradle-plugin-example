@@ -104,6 +104,8 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
         variantData.dexTask = dexTask
 
         maybeCreateProguardTasks(variantData)
+
+        variantData.dexTask.dependsOn(variantData.obfuscationTask)
     }
 
     private fun maybeCreateProguardTasks(variantData: ApkVariantOutputData) {
