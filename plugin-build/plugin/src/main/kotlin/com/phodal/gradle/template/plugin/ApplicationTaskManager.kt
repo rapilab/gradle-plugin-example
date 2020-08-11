@@ -4,7 +4,7 @@ import com.phodal.gradle.template.plugin.internal.DependencyManager
 import org.gradle.api.Project
 import org.gradle.api.tasks.TaskContainer
 
-class ApplicationTaskManager(project: Project, dependencyManager: DependencyManager) {
+class ApplicationTaskManager(val project: Project, dependencyManager: DependencyManager) {
     fun createMockableJarTask() {
 
     }
@@ -77,7 +77,8 @@ class ApplicationTaskManager(project: Project, dependencyManager: DependencyMana
     private fun createSplitAbiTasks() {}
     private fun createSplitResourcesTasks() {}
     private fun createPackagingTask(tasks: TaskContainer) {
-
+        val packageApp = project.tasks.create("package", PackageApplication::class.java)
+        packageApp.run {  }
     }
 
     /**

@@ -91,8 +91,6 @@ abstract class AppPlugin : Plugin<Project> {
 
     private fun ensureTargetSetup() {
         val tasks = project.tasks
-        println(".............................................")
-        println(tasks)
         createTasksForVariantData(tasks)
     }
 
