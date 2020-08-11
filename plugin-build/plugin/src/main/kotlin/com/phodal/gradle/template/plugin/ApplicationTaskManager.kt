@@ -7,6 +7,7 @@ import com.phodal.gradle.template.plugin.internal.tasks.ShrinkResources
 import com.phodal.gradle.template.plugin.internal.tasks.TaskManager
 import com.phodal.gradle.template.plugin.internal.variant.ApkVariantOutputData
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.compile.JavaCompile
 
@@ -15,9 +16,9 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
     fun createMockableJarTask() {
 
     }
-
-    fun createAssembleTask() {
-
+    fun createAssembleTask(variantOutputData: ApkVariantOutputData): Task {
+        val assembleTask = project.tasks.create("assemble")
+        return assembleTask
     }
 
     fun createTasksForVariantData(
@@ -105,11 +106,22 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
 
         packageApp.dependsOn(variantOutputData.processResourcesTask)
 
-        createShrinkResourcesTask(variantOutputData)
+        val shrink = createShrinkResourcesTask(variantOutputData)
+        packageApp.dependsOn(shrink)
+
+        var appTask: Task = packageApp
+
+
+//        println(appTask)
+
+        variantOutputData.assembleTask = createAssembleTask(variantOutputData)
+        variantOutputData.assembleTask!!.dependsOn(appTask)
+
     }
 
-    private fun createShrinkResourcesTask(variantOutputData: ApkVariantOutputData) {
-        project.tasks.create("shrinkResources", ShrinkResources::class.java);
+    private fun createShrinkResourcesTask(variantOutputData: ApkVariantOutputData): ShrinkResources {
+        val task = project.tasks.create("shrinkResources", ShrinkResources::class.java)
+        return task
     }
 
     /**

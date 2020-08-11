@@ -1,5 +1,10 @@
 package com.phodal.gradle.template.plugin.internal.tasks
 
-open class ShrinkResources: BaseTask() {
+import org.gradle.api.tasks.TaskAction
 
+open class ShrinkResources: BaseTask() {
+    @TaskAction
+    fun shrink() {
+        println("shrink")
+    }
 }
