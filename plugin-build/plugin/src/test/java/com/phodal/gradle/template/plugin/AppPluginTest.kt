@@ -10,6 +10,6 @@ class AppPluginTest {
         val project = ProjectBuilder.builder().build()
         project.pluginManager.apply("com.phodal.gradle.template.plugin")
 
-        assert(project.tasks.getByName("templateExample") is TemplateExampleTask)
+        assert(project.tasks.getByName("Samples") is TemplateExampleTask)
     }
 }
