@@ -5,10 +5,11 @@ import org.gradle.api.Project
 import org.gradle.api.plugins.JavaBasePlugin
 
 const val EXTENSION_NAME = "templateExampleConfig"
-const val TASK_NAME = "templateExample"
+const val TASK_NAME = "Samples"
 
-abstract class TemplatePlugin : Plugin<Project> {
+abstract class AppPlugin : Plugin<Project> {
     private lateinit var project: Project
+    private lateinit var extraModelInfo: ExtraModelInfo
 
     override fun apply(project: Project) {
         // Add the 'template' extension object
@@ -33,10 +34,10 @@ abstract class TemplatePlugin : Plugin<Project> {
     }
 
     private fun createExtension() {
-
+        val dependencyManager = DependencyManager(project, extraModelInfo)
     }
 
     private fun configureProject() {
-
+        extraModelInfo = ExtraModelInfo(project)
     }
 }

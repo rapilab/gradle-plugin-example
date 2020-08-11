@@ -3,7 +3,7 @@ package com.ncorti.kotlin.gradle.template.plugin
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
 
-class TemplatePluginTest {
+class AppPluginTest {
 
     @Test
     fun `plugin is applied correctly to the project`() {
