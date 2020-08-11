@@ -1,15 +1,10 @@
 package com.phodal.gradle.template.plugin
 
 import com.phodal.gradle.template.plugin.internal.DependencyManager
-import com.phodal.gradle.template.plugin.internal.tasks.PackageApplication
-import com.phodal.gradle.template.plugin.internal.tasks.ProcessAndroidResources
-import com.phodal.gradle.template.plugin.internal.tasks.ShrinkResources
-import com.phodal.gradle.template.plugin.internal.tasks.TaskManager
+import com.phodal.gradle.template.plugin.internal.tasks.*
 import com.phodal.gradle.template.plugin.internal.variant.ApkVariantOutputData
-import groovy.transform.CompileDynamic
 import org.gradle.api.Project
 import org.gradle.api.Task
-import org.gradle.api.internal.ConventionMapping
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.compile.JavaCompile
 
@@ -47,7 +42,7 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
         // compile java
         createJavaCompileTask()
         createJarTask()
-        createPostCompilationTasks()
+        createPostCompilationTasks(variantData)
 
         val is_ndk = false
         if (is_ndk) {
@@ -104,7 +99,9 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
      *
      * @param variantData the variant data.
      */
-    private fun createPostCompilationTasks() {
+    private fun createPostCompilationTasks(variantData: ApkVariantOutputData) {
+        val dexTask = project.tasks.create("dex", Dex::class.java)
+        variantData.dexTask = dexTask
 
     }
 
@@ -142,4 +139,12 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
     private fun handleMicroApp() {
 
     }
+
+    fun optionalDependsOn(main: Task, vararg dependencies: Task) {
+        for (dependency in dependencies) {
+            main.dependsOn(dependency)
+        }
+
+    }
+
 }
