@@ -13,7 +13,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 ```
 
-2.
+2. main tasks
+
+```kotlin
+configureProject()
+createExtension()
+createTasks()
+```
+
 
 
 ## Documents
