@@ -16,6 +16,7 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
     fun createMockableJarTask() {
 
     }
+
     fun createAssembleTask(variantOutputData: ApkVariantOutputData): Task {
         val assembleTask = project.tasks.create("assemble")
         return assembleTask
@@ -23,9 +24,9 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
 
     fun createTasksForVariantData(
         tasks: TaskContainer,
-        apkVariantOutputData: ApkVariantOutputData
+        variantData: ApkVariantOutputData
     ) {
-        createAnchorTasks()
+        createAnchorTasks(variantData)
         createCheckManifestTask()
 
         createMergeAppManifestsTask()
@@ -37,7 +38,7 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
 
         createBuildConfigTask()
         createPreprocessResourcesTask()
-        createProcessResTask(apkVariantOutputData)
+        createProcessResTask(variantData)
         createProcessJavaResTask()
         createAidlTask()
 
@@ -55,12 +56,23 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
         createSplitAbiTasks();
 
 
-        createPackagingTask(tasks, apkVariantOutputData)
+        createPackagingTask(tasks, variantData)
 
         handleMicroApp()
     }
 
-    private fun createAnchorTasks() {}
+    private fun createAnchorTasks(variantData: ApkVariantOutputData) {
+        createPreBuildTasks(variantData)
+    }
+
+    private fun createPreBuildTasks(variantData: ApkVariantOutputData) {
+        variantData.preBuildTask = project.tasks.create("preBuild")
+        val prepareDependenciesTask = project.tasks.create("prepareDependencies", PrepareDependenciesTask::class.java)
+
+        variantData.prepareDependenciesTask = prepareDependenciesTask
+        prepareDependenciesTask.dependsOn(variantData.preBuildTask)
+    }
+
     private fun createCheckManifestTask() {}
     private fun createMergeAppManifestsTask() {}
     private fun createGenerateResValuesTask() {}
