@@ -85,11 +85,11 @@ abstract class AppPlugin : Plugin<Project> {
     }
 
     private fun createAndroidTasks(force: Boolean) {
-        if (project.plugins.hasPlugin(JavaPlugin::class.java)) {
-            throw GradleException(
-                "The 'java' plugin has been applied, but it is not compatible with the Android plugins."
-            )
-        }
+//        if (project.plugins.hasPlugin(JavaPlugin::class.java)) {
+//            throw GradleException(
+//                "The 'java' plugin has been applied, but it is not compatible with the Android plugins."
+//            )
+//        }
 
         taskManager.createMockableJarTask()
         variantManager.createAndroidTasks()

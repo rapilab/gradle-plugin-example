@@ -7,6 +7,7 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.compile.JavaCompile
+import java.io.File
 
 class ApplicationTaskManager(val project: Project, dependencyManager: DependencyManager) :
     TaskManager {
@@ -15,7 +16,7 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
     }
 
     fun createAssembleTask(variantOutputData: ApkVariantOutputData): Task {
-        val assembleTask = project.tasks.create("assemble")
+        val assembleTask = project.tasks.create("assembleDebug")
         return assembleTask
     }
 
@@ -79,7 +80,7 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
     private fun createBuildConfigTask() {}
     private fun createPreprocessResourcesTask() {}
     private fun createProcessResTask(variantOutputData: ApkVariantOutputData) {
-        val processAndroidResources = project.tasks.create("processResources", ProcessAndroidResources::class.java)
+        val processAndroidResources = project.tasks.create("processResources2", ProcessAndroidResources::class.java)
         variantOutputData.processResourcesTask = processAndroidResources
     }
 
@@ -111,6 +112,14 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
     private fun maybeCreateProguardTasks(variantData: ApkVariantOutputData) {
         val proguardTask = project.tasks.create("proguard", AndroidProGuardTask::class.java)
         variantData.obfuscationTask = proguardTask
+
+        proguardTask.configuration {
+            val proguardFiles: MutableList<File> = mutableListOf()
+            proguardFiles.add(File("proguard-android.txt"))
+            proguardFiles
+        }
+
+        proguardTask.injars("libs/hello.jar")
     }
 
     private fun createNdkTasks() {}
