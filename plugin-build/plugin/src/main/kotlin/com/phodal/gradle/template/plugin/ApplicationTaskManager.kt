@@ -119,7 +119,8 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
             proguardFiles
         }
 
-        proguardTask.injars("libs/hello.jar")
+        proguardTask.injars("build/libs/example.jar")
+        proguardTask.outjars("build/libs/classes.jar")
     }
 
     private fun createNdkTasks() {}
