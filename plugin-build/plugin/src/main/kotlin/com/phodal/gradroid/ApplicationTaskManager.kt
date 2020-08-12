@@ -199,4 +199,8 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
 
     }
 
+    fun createLintCompileTask() {
+
+    }
+
 }
