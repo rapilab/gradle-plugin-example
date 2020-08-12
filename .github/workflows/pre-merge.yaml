@@ -36,12 +36,12 @@ jobs:
 
         # We do a run of the new task `templateExample` created by the plugin
       - name: Run the plugin
-        run: ./gradlew Samples --message="Test Run" --tag=CI
+        run: ./gradlew assembleDebug
         if: success()
         # And we verify that the output of the file is correct.
-      - name: Verify the plugin output
-        run: grep -Fxq "[CI] Test Run" ./example/build/template-example.txt
-        if: success()
+#      - name: Verify the plugin output
+#        run: grep -Fxq "[CI] Test Run" ./example/build/template-example.txt
+#        if: success()
 
       - name: Stop Gradle
         run: ./gradlew --stop
