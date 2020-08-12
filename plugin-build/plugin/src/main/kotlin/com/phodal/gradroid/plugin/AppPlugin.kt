@@ -65,11 +65,11 @@ abstract class AppPlugin @Inject constructor(private var instantiator: Instantia
     }
 
     private fun createExtension() {
-        project.extensions.create("phodal", BaseExtension::class.java, project, instantiator)
+        val extension = project.extensions.create("phodal", AppExtension::class.java, project, instantiator)
 
         val dependencyManager = DependencyManager(project, extraModelInfo)
         taskManager = ApplicationTaskManager(project, dependencyManager)
-        variantManager = VariantManager(project, taskManager)
+        variantManager = VariantManager(project, taskManager, extension)
 
         val modelBuilder = ModelBuilder(taskManager, variantManager)
         registry.register(modelBuilder)

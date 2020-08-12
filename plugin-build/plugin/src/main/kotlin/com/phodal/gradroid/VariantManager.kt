@@ -6,12 +6,15 @@ import com.phodal.gradroid.internal.api.DefaultAndroidSourceSet
 import com.phodal.gradroid.internal.variant.ApkVariantOutputData
 import com.phodal.gradroid.internal.variant.BaseVariantData
 import com.phodal.gradroid.internal.variant.BaseVariantOutputData
+import com.phodal.gradroid.plugin.AppExtension
+import com.phodal.gradroid.plugin.BaseExtension
 import org.gradle.api.Project
 import org.gradle.api.tasks.TaskContainer
 
 class VariantManager(
-    var project: Project,
-    var taskManager: ApplicationTaskManager
+        var project: Project,
+        var taskManager: ApplicationTaskManager,
+        extension: BaseExtension
 ) {
 //    private val buildTypes: Map<String, BuildTypeData> = Maps.newHashMap()
     private val variantDataList: List<BaseVariantData<out BaseVariantOutputData>> = mutableListOf()
@@ -19,7 +22,7 @@ class VariantManager(
 
     init {
 
-//        val mainSourceSet: DefaultAndroidSourceSet = extension.getSourceSets().getByName(extension.getDefaultConfig().getName()) as DefaultAndroidSourceSet
+        val mainSourceSet: DefaultAndroidSourceSet = extension.getSourceSets().getByName(extension.defaultConfig.name) as DefaultAndroidSourceSet
 
         this.defaultConfigData = ProductFlavorData<ProductFlavor>(project, null)
     }

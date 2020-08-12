@@ -1,10 +1,11 @@
 package com.phodal.gradroid.internal.api
 
 import com.phodal.gradroid.model.SourceProvider
+import org.gradle.api.Project
 import java.io.File
 
-class DefaultAndroidSourceSet: AndroidSourceSet, SourceProvider {
-    private val name: String? = null
+open class DefaultAndroidSourceSet(name: String, project: Project) : AndroidSourceSet, SourceProvider {
+
     private val manifestFile: File? = null
     private val javaDirs: Collection<File>? = null
     private val resourcesDirs: Collection<File>? = null
