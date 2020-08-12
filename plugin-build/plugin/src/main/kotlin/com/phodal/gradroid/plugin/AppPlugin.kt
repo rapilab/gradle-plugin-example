@@ -21,7 +21,7 @@ abstract class AppPlugin : Plugin<Project> {
     private lateinit var project: Project
     private lateinit var extraModelInfo: ExtraModelInfo
     private var registry: ToolingModelBuilderRegistry
-    protected lateinit var variantManager: VariantManager
+    private lateinit var variantManager: VariantManager
 
     @Inject
     constructor(registry: ToolingModelBuilderRegistry) {
@@ -96,21 +96,5 @@ abstract class AppPlugin : Plugin<Project> {
     }
 
     private fun ensureTargetSetup() {
-        val tasks = project.tasks
-        createTasksForVariantData(tasks)
     }
-
-    private fun createTasksForVariantData(tasks: TaskContainer) {
-        val apkVariantOutputData = ApkVariantOutputData(taskManager);
-        createAssembleTaskForVariantData(tasks, apkVariantOutputData)
-        taskManager.createTasksForVariantData(tasks, apkVariantOutputData)
-    }
-
-    private fun createAssembleTaskForVariantData(
-        tasks: TaskContainer,
-        variantOutputData: ApkVariantOutputData
-    ) {
-        taskManager.createAssembleTask(variantOutputData)
-    }
-
 }

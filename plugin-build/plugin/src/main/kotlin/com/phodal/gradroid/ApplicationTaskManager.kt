@@ -80,6 +80,8 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
 
         variantData.prepareDependenciesTask = prepareDependenciesTask
         prepareDependenciesTask.dependsOn(variantData.preBuildTask)
+
+
     }
 
     private fun createCheckManifestTask() {}
