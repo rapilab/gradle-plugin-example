@@ -17,7 +17,7 @@ class VariantManager(
 ) {
 //    private val buildTypes: Map<String, BuildTypeData> = Maps.newHashMap()
     private val variantDataList: List<BaseVariantData<out BaseVariantOutputData>> = mutableListOf()
-    private var defaultConfigData: ProductFlavorData<ProductFlavor>? = null
+    private var defaultConfigData: ProductFlavorData<ProductFlavor>
 
     init {
         val mainSourceSet: DefaultAndroidSourceSet = extension.getSourceSets().getByName(extension.defaultConfig.name) as DefaultAndroidSourceSet
@@ -46,7 +46,18 @@ class VariantManager(
     }
 
     private fun createVariantData(productFlavorList: List<ProductFlavor>) {
-        this.defaultConfigData!!.sourceSet
+        val variantConfig = GradleVariantConfiguration(
+            defaultConfigData.sourceSet
+        )
+
+        createCompoundSourceSets(productFlavorList, variantConfig);
+    }
+
+    private fun createCompoundSourceSets(
+        productFlavorList: List<ProductFlavor>,
+        variantConfig: GradleVariantConfiguration
+    ) {
+
     }
 
 

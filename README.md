@@ -21,9 +21,23 @@ createExtension()
 createTasks()
 ```
 
-
-
 ## Documents
+
+### Gradle Flavors
+
+sample
+
+```
+android {
+    ....
+
+    productFlavors {
+        flavor1 {
+            minSdkVersion 14
+        }
+    }
+}
+```
 
 ### Application Build logs
 
