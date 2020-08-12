@@ -1,6 +1,7 @@
 package com.phodal.gradroid.plugin
 
 import com.phodal.gradroid.ApplicationTaskManager
+import com.phodal.gradroid.PConfig
 import com.phodal.gradroid.VariantManager
 import com.phodal.gradroid.internal.DependencyManager
 import com.phodal.gradroid.internal.ExtraModelInfo
@@ -53,7 +54,8 @@ abstract class AppPlugin @Inject constructor(private var instantiator: Instantia
     }
 
     private fun createExtension() {
-        val extension = project.extensions.create("phodal", AppExtension::class.java, project, instantiator)
+        var container = project.container(PConfig::class.java, PConfigFactory(instantiator))
+        val extension = project.extensions.create("phodal", AppExtension::class.java, project, instantiator, container)
 
         val dependencyManager = DependencyManager(project, extraModelInfo)
         taskManager = ApplicationTaskManager(project, dependencyManager)

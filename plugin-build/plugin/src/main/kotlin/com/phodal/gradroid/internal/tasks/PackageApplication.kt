@@ -36,7 +36,7 @@ open class PackageApplication : IncrementalTask() {
 
     @TaskAction
     fun perform() {
-        println("Content printed to file successfully")
+//        println("Content printed to file successfully")
     }
 
     override fun doFullTaskAction() {
