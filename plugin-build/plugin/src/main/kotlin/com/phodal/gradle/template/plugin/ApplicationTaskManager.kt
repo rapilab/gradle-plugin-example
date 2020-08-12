@@ -7,11 +7,11 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.compile.JavaCompile
-import org.gradle.util.Path
 import java.io.File
 
 class ApplicationTaskManager(val project: Project, dependencyManager: DependencyManager) :
     TaskManager {
+    var FD_INTERMEDIATES = "intermediates"
     fun createMockableJarTask() {
 
     }
@@ -131,8 +131,8 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
 //        }
         }
 
-        proguardTask.injars("build/libs/example.jar")
-        proguardTask.outjars("build/libs/classes.jar")
+        proguardTask.injars("${project.buildDir}/libs/example.jar")
+        proguardTask.outjars("${project.buildDir}/${FD_INTERMEDIATES}/example.jar")
     }
 
     private fun getBootClasspathAsStrings(project: Project) {
