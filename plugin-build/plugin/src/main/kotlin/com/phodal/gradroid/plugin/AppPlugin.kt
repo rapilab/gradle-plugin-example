@@ -1,9 +1,11 @@
 package com.phodal.gradroid.plugin
 
-import com.phodal.gradle.template.plugin.internal.DependencyManager
-import com.phodal.gradle.template.plugin.internal.ExtraModelInfo
-import com.phodal.gradle.template.plugin.internal.ModelBuilder
-import com.phodal.gradle.template.plugin.internal.variant.ApkVariantOutputData
+import com.phodal.gradroid.ApplicationTaskManager
+import com.phodal.gradroid.VariantManager
+import com.phodal.gradroid.internal.DependencyManager
+import com.phodal.gradroid.internal.ExtraModelInfo
+import com.phodal.gradroid.internal.ModelBuilder
+import com.phodal.gradroid.internal.variant.ApkVariantOutputData
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaBasePlugin

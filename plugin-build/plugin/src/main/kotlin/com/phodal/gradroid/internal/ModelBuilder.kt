@@ -1,7 +1,7 @@
 package com.phodal.gradroid.internal
 
-import com.phodal.gradle.template.plugin.ApplicationTaskManager
-import com.phodal.gradle.template.plugin.VariantManager
+import com.phodal.gradroid.ApplicationTaskManager
+import com.phodal.gradroid.VariantManager
 import org.gradle.api.Project
 import org.gradle.tooling.provider.model.ToolingModelBuilder
 

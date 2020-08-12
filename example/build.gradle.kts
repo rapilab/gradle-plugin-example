@@ -1,6 +1,6 @@
 plugins {
     java
-    id("com.phodal.gradle.template.plugin")
+    id("com.phodal.gradroid.plugin")
 }
 
 phodalConfig {

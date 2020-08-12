@@ -9,7 +9,7 @@ class AppPluginTest {
     @Test
     fun `plugin is applied correctly to the project`() {
         val project = ProjectBuilder.builder().build()
-        project.pluginManager.apply("com.phodal.gradle.template.plugin")
+        project.pluginManager.apply("com.phodal.gradroid.plugin")
 
         assert(project.tasks.getByName("Samples") is TemplateExampleTask)
     }

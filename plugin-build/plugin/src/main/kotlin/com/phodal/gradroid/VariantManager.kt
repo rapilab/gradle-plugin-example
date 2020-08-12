@@ -1,7 +1,7 @@
 package com.phodal.gradroid
 
-import com.phodal.gradle.template.plugin.internal.ProductFlavor
-import com.phodal.gradle.template.plugin.internal.ProductFlavorData
+import com.phodal.gradroid.internal.ProductFlavor
+import com.phodal.gradroid.internal.ProductFlavorData
 import org.gradle.api.Project
 
 class VariantManager(

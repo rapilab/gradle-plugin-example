@@ -1,8 +1,8 @@
 package com.phodal.gradroid
 
-import com.phodal.gradle.template.plugin.internal.DependencyManager
-import com.phodal.gradle.template.plugin.internal.tasks.*
-import com.phodal.gradle.template.plugin.internal.variant.ApkVariantOutputData
+import com.phodal.gradroid.internal.DependencyManager
+import com.phodal.gradroid.internal.tasks.*
+import com.phodal.gradroid.internal.variant.ApkVariantOutputData
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.tasks.TaskContainer
@@ -10,7 +10,7 @@ import org.gradle.api.tasks.compile.JavaCompile
 import java.io.File
 
 class ApplicationTaskManager(val project: Project, dependencyManager: DependencyManager) :
-    TaskManager {
+        TaskManager {
     var FD_INTERMEDIATES = "intermediates"
     fun createMockableJarTask() {
 

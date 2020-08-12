@@ -1,8 +1,8 @@
 object PluginCoordinates {
-    const val ID = "com.phodal.gradle.template.plugin"
+    const val ID = "com.phodal.gradroid.plugin"
     const val GROUP = "com.phodal.gradle.template"
     const val VERSION = "1.0.0"
-    const val IMPLEMENTATION_CLASS = "com.phodal.gradle.template.plugin.AppPlugin"
+    const val IMPLEMENTATION_CLASS = "com.phodal.gradroid.plugin.AppPlugin"
 }
 
 object PluginBundle {

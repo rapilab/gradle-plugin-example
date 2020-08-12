@@ -1,8 +1,8 @@
 package com.phodal.gradroid.internal.variant
 
-import com.phodal.gradle.template.plugin.internal.tasks.PrepareDependenciesTask
-import com.phodal.gradle.template.plugin.internal.tasks.AndroidProGuardTask
-import com.phodal.gradle.template.plugin.internal.tasks.ProcessAndroidResources
+import com.phodal.gradroid.internal.tasks.AndroidProGuardTask
+import com.phodal.gradroid.internal.tasks.PrepareDependenciesTask
+import com.phodal.gradroid.internal.tasks.ProcessAndroidResources
 import org.gradle.api.Task
 
 abstract class BaseVariantOutputData: VariantOutput {
