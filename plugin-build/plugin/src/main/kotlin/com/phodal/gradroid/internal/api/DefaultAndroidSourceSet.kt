@@ -2,38 +2,54 @@ package com.phodal.gradroid.internal.api
 
 import com.phodal.gradroid.model.SourceProvider
 import org.gradle.api.Project
+import org.gradle.util.GUtil
 import java.io.File
 
-open class DefaultAndroidSourceSet(name: String, project: Project) : AndroidSourceSet, SourceProvider {
+open class DefaultAndroidSourceSet(private val name: String, project: Project) : AndroidSourceSet, SourceProvider {
+    private var manifestFile: File? = null
+    private var javaDirs: Collection<File>? = null
+    private var resourcesDirs: Collection<File>? = null
+    private var resDirs: Collection<File>? = null
+    private var assetsDirs: Collection<File>? = null
 
-    private val manifestFile: File? = null
-    private val javaDirs: Collection<File>? = null
-    private val resourcesDirs: Collection<File>? = null
-    private val resDirs: Collection<File>? = null
-    private val assetsDirs: Collection<File>? = null
+    private var javaSource: AndroidSourceDirectorySet
+    private var displayName: String
+
+    init {
+        this.displayName = GUtil.toWords(name)
+
+        val javaSrcDisplayName = String.format("%s Java source", displayName)
+
+        javaSource = DefaultAndroidSourceDirectorySet(javaSrcDisplayName, project)
+        javaSource.getFilter().include("**/*.java")
+//
+//        val javaResourcesDisplayName = String.format("%s Java resources", displayName)
+//        javaResources = DefaultAndroidSourceDirectorySet(javaResourcesDisplayName, project)
+//        javaResources.getFilter().exclude("**/*.java")
+    }
 
     override fun getName(): String? {
-        TODO("Not yet implemented")
+        return "main"
     }
 
     override fun getManifestFile(): File? {
-        TODO("Not yet implemented")
+        return null
     }
 
     override fun getJavaDirectories(): Collection<File?>? {
-        TODO("Not yet implemented")
+        return null
     }
 
     override fun getAssetsDirectories(): Collection<File?>? {
-        TODO("Not yet implemented")
+        return null
     }
 
     override fun getResDirectories(): Collection<File?>? {
-        TODO("Not yet implemented")
+        return null
     }
 
     override fun getResourcesDirectories(): Collection<File?>? {
-        TODO("Not yet implemented")
+        return null
     }
 
 }
