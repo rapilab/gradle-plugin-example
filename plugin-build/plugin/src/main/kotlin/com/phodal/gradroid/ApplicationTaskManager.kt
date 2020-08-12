@@ -105,6 +105,7 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
         variantData.javaCompileTask = javaCompileTask
         variantData.compileTask?.dependsOn(variantData.javaCompileTask)
 
+//        javaCompileTask.source = variantData.javaSources
         javaCompileTask.dependsOn(variantData.prepareDependenciesTask)
     }
 
