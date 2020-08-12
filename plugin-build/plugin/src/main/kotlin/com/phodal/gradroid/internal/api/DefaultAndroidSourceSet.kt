@@ -13,11 +13,9 @@ open class DefaultAndroidSourceSet(private val name: String, project: Project) :
     private var assetsDirs: Collection<File>? = null
 
     private var javaSource: AndroidSourceDirectorySet
-    private var displayName: String
+    private var displayName: String = GUtil.toWords(name)
 
     init {
-        this.displayName = GUtil.toWords(name)
-
         val javaSrcDisplayName = String.format("%s Java source", displayName)
 
         javaSource = DefaultAndroidSourceDirectorySet(javaSrcDisplayName, project)
@@ -29,7 +27,7 @@ open class DefaultAndroidSourceSet(private val name: String, project: Project) :
     }
 
     override fun getName(): String? {
-        return "main"
+        return name
     }
 
     override fun getManifestFile(): File? {

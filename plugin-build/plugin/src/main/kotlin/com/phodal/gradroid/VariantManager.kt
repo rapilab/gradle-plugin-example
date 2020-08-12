@@ -6,7 +6,6 @@ import com.phodal.gradroid.internal.api.DefaultAndroidSourceSet
 import com.phodal.gradroid.internal.variant.ApkVariantOutputData
 import com.phodal.gradroid.internal.variant.BaseVariantData
 import com.phodal.gradroid.internal.variant.BaseVariantOutputData
-import com.phodal.gradroid.plugin.AppExtension
 import com.phodal.gradroid.plugin.BaseExtension
 import org.gradle.api.Project
 import org.gradle.api.tasks.TaskContainer
@@ -21,10 +20,8 @@ class VariantManager(
     private var defaultConfigData: ProductFlavorData<ProductFlavor>? = null
 
     init {
-
         val mainSourceSet: DefaultAndroidSourceSet = extension.getSourceSets().getByName(extension.defaultConfig.name) as DefaultAndroidSourceSet
-
-        this.defaultConfigData = ProductFlavorData<ProductFlavor>(project, null)
+        this.defaultConfigData = ProductFlavorData<ProductFlavor>(project, mainSourceSet)
     }
 
     fun createAndroidTasks() {
@@ -49,7 +46,7 @@ class VariantManager(
     }
 
     private fun createVariantData(productFlavorList: List<ProductFlavor>) {
-//        this.defaultConfigData!!.sourceSet
+        this.defaultConfigData!!.sourceSet
     }
 
 

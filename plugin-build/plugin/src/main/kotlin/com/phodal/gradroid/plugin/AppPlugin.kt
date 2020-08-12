@@ -12,9 +12,6 @@ import org.gradle.internal.reflect.Instantiator
 import org.gradle.tooling.provider.model.ToolingModelBuilderRegistry
 import javax.inject.Inject
 
-const val EXTENSION_NAME = "phodalConfig"
-const val TASK_NAME = "Samples"
-
 abstract class AppPlugin @Inject constructor(private var instantiator: Instantiator, private var registry: ToolingModelBuilderRegistry) : Plugin<Project> {
     private lateinit var taskManager: ApplicationTaskManager
     private lateinit var project: Project
@@ -29,15 +26,6 @@ abstract class AppPlugin @Inject constructor(private var instantiator: Instantia
     }
 
     override fun apply(project: Project) {
-//        // Add the 'template' extension object
-//        val extension = project.extensions.create(EXTENSION_NAME, TemplateExtension::class.java, project)
-//        // Add a task that uses configuration from the extension object
-//        project.tasks.register(TASK_NAME, TemplateExampleTask::class.java) {
-//            it.tag.set(extension.tag)
-//            it.message.set(extension.message)
-//            it.outputFile.set(extension.outputFile)
-//        }
-
         this.project = project
 
         configureProject()
