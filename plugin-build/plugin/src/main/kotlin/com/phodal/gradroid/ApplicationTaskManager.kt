@@ -5,6 +5,7 @@ import com.phodal.gradroid.internal.tasks.*
 import com.phodal.gradroid.internal.variant.ApkVariantOutputData
 import org.gradle.api.Project
 import org.gradle.api.Task
+import org.gradle.api.plugins.BasePlugin.BUILD_GROUP
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.compile.JavaCompile
 import java.io.File
@@ -42,7 +43,7 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
         createAidlTask()
 
         // compile java
-        createJavaCompileTask()
+        createJavaCompileTask(variantData)
         createJarTask()
         createPostCompilationTasks(variantData)
 
@@ -62,6 +63,15 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
 
     private fun createAnchorTasks(variantData: ApkVariantOutputData) {
         createPreBuildTasks(variantData)
+
+        createCompileAnchorTask(variantData)
+    }
+
+    private fun createCompileAnchorTask(variantData: ApkVariantOutputData) {
+        variantData.compileTask = project.tasks.create("compileDebugSources")
+        variantData.compileTask!!.group = BUILD_GROUP
+
+//        variantData.assembleVariantTask!!.dependsOn(variantData.compileTask)
     }
 
     private fun createPreBuildTasks(variantData: ApkVariantOutputData) {
@@ -87,8 +97,13 @@ class ApplicationTaskManager(val project: Project, dependencyManager: Dependency
 
     private fun createProcessJavaResTask() {}
     private fun createAidlTask() {}
-    private fun createJavaCompileTask() {
+    private fun createJavaCompileTask(variantData: ApkVariantOutputData) {
         val javaCompileTask = project.tasks.create("compileDebugJava", JavaCompile::class.java)
+
+        variantData.javaCompileTask = javaCompileTask
+        variantData.compileTask?.dependsOn(variantData.javaCompileTask)
+
+        javaCompileTask.dependsOn(variantData.prepareDependenciesTask)
     }
 
     private fun createJarTask() {}
