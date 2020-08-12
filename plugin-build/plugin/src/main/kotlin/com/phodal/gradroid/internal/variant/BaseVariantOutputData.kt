@@ -4,6 +4,7 @@ import com.phodal.gradroid.internal.tasks.AndroidProGuardTask
 import com.phodal.gradroid.internal.tasks.PrepareDependenciesTask
 import com.phodal.gradroid.internal.tasks.ProcessAndroidResources
 import org.gradle.api.Task
+import org.gradle.api.file.FileTree
 import org.gradle.api.tasks.compile.JavaCompile
 
 abstract class BaseVariantOutputData() : VariantOutput {
@@ -15,10 +16,10 @@ abstract class BaseVariantOutputData() : VariantOutput {
     var prepareDependenciesTask: PrepareDependenciesTask? = null
     var assembleTask: Task? = null
     var processResourcesTask: ProcessAndroidResources? = null
-    var javaSources: Array<Any> = arrayOf()
+    var javaSources: Array<FileTree> = arrayOf()
         get() {
             if (field.isEmpty()) {
-                val sourceList: List<Any> = arrayListOf()
+                val sourceList: List<FileTree> = arrayListOf()
 
                 field = sourceList.toTypedArray()
             }

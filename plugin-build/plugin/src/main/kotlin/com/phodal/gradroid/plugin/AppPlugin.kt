@@ -5,27 +5,23 @@ import com.phodal.gradroid.VariantManager
 import com.phodal.gradroid.internal.DependencyManager
 import com.phodal.gradroid.internal.ExtraModelInfo
 import com.phodal.gradroid.internal.ModelBuilder
-import com.phodal.gradroid.internal.variant.ApkVariantOutputData
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaBasePlugin
-import org.gradle.api.tasks.TaskContainer
+import org.gradle.internal.reflect.Instantiator
 import org.gradle.tooling.provider.model.ToolingModelBuilderRegistry
 import javax.inject.Inject
 
 const val EXTENSION_NAME = "phodalConfig"
 const val TASK_NAME = "Samples"
 
-abstract class AppPlugin : Plugin<Project> {
+abstract class AppPlugin @Inject constructor(private var instantiator: Instantiator, private var registry: ToolingModelBuilderRegistry) : Plugin<Project> {
     private lateinit var taskManager: ApplicationTaskManager
     private lateinit var project: Project
     private lateinit var extraModelInfo: ExtraModelInfo
-    private var registry: ToolingModelBuilderRegistry
     private lateinit var variantManager: VariantManager
 
-    @Inject
-    constructor(registry: ToolingModelBuilderRegistry) {
-        this.registry = registry
+    init {
         verifyRetirementAge()
     }
 
@@ -69,6 +65,8 @@ abstract class AppPlugin : Plugin<Project> {
     }
 
     private fun createExtension() {
+        project.extensions.create("phodal", BaseExtension::class.java, project, instantiator)
+
         val dependencyManager = DependencyManager(project, extraModelInfo)
         taskManager = ApplicationTaskManager(project, dependencyManager)
         variantManager = VariantManager(project, taskManager)
