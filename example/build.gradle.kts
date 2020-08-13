@@ -13,5 +13,8 @@ java {
 }
 
 phodal {
-
+    pConfig {
+//        message("phodal")
+//        message = "phodal"
+    }
 }
