@@ -18,3 +18,8 @@ phodal {
 //        message = "phodal"
     }
 }
+
+dependencies {
+//    implementation(kotlin("stdlib-jdk7"))
+//    implementation(gradleApi())
+}

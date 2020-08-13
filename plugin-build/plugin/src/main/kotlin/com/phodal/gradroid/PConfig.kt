@@ -3,7 +3,8 @@ package com.phodal.gradroid
 import org.gradle.api.Named
 import org.gradle.api.tasks.Input
 
-class PConfig(private val name: String): Named {
+open class PConfig(private val name: String): Named {
+    private var mSdkVersion: Int = 0
     private lateinit var mMessage: String
 
     override fun getName(): String {
@@ -13,5 +14,10 @@ class PConfig(private val name: String): Named {
     @Input
     fun message(msg: String) {
         this.mMessage = msg
+    }
+
+    @Input
+    fun sdkVersion(version: Int) {
+        this.mSdkVersion = version
     }
 }

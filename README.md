@@ -25,6 +25,8 @@ createTasks()
 
 Extension -> [Developing Custom Gradle Plugins](https://docs.gradle.org/current/userguide/custom_plugins.html)
 
+[Gradle Kotlin DSL迁移指南](https://juejin.im/post/6844903763598114823)
+
 ### Android Extenions
 
 ```gradle
