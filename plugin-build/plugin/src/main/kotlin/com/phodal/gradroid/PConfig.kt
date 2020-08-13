@@ -9,5 +9,4 @@ class PConfig(name: String) : Serializable, Named {
     override fun getName(): String {
         return mName;
     }
-
 }
