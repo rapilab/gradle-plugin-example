@@ -14,12 +14,12 @@ java {
 
 phodal {
     pConfig {
-//        message("phodal")
+        message("phodal")
 //        message = "phodal"
     }
 }
 
 dependencies {
-//    implementation(kotlin("stdlib-jdk7"))
+    implementation(kotlin("stdlib-jdk7"))
 //    implementation(gradleApi())
 }
