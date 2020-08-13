@@ -1,5 +1,6 @@
 # Android Gradle Plugin Research
 
+> Research on build a Gradle plugin for Android application.
 
 Android Gradle Plugin Code: [The Android Gradle Plugin](https://android.googlesource.com/platform/tools/base/+/studio-master-dev/build-system/README.md)
 
@@ -17,8 +18,6 @@ apply plugin: 'kotlin-android-extensions'
 
 ```kotlin
 configureProject()
-createExtension()
-createTasks()
 ```
 
 ## Documents
@@ -147,8 +146,20 @@ android {
     }
   }
 }
+```
+
+map to extension:
 
 ```
+open class AppExtension(project: ProjectInternal, var instantiator: Instantiator) : BaseExtension(project, instantiator) {
+    var pConfig: PConfig = instantiator.newInstance(PConfig::class.java, "name")
+
+    fun pConfig(action: Action<in PConfig>) {
+        action.execute(pConfig);
+    }
+}
+```
+
 
 ### Gradle Flavors
 
