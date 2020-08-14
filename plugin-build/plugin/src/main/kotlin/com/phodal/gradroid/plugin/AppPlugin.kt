@@ -1,11 +1,11 @@
 package com.phodal.gradroid.plugin
 
 import com.phodal.gradroid.ApplicationTaskManager
-import com.phodal.gradroid.PConfig
 import com.phodal.gradroid.VariantManager
 import com.phodal.gradroid.internal.DependencyManager
 import com.phodal.gradroid.internal.ExtraModelInfo
 import com.phodal.gradroid.internal.ModelBuilder
+import com.phodal.gradroid.internal.VariantDependencies
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaBasePlugin
@@ -58,6 +58,8 @@ abstract class AppPlugin @Inject constructor(private var instantiator: Instantia
         val extension = project.extensions.create("phodal", AppExtension::class.java, project, instantiator)
 
         val dependencyManager = DependencyManager(project, extraModelInfo)
+        dependencyManager.resolveDependencyForConfig(VariantDependencies())
+
         taskManager = ApplicationTaskManager(project, dependencyManager)
         variantManager = VariantManager(project, taskManager, extension)
 
@@ -78,6 +80,13 @@ abstract class AppPlugin @Inject constructor(private var instantiator: Instantia
 //                "The 'java' plugin has been applied, but it is not compatible with the Android plugins."
 //            )
 //        }
+
+
+        project.configurations.all {
+//            resolutionStrategy.eachDependency {
+
+//            }
+        }
 
         taskManager.createMockableJarTask()
         variantManager.createAndroidTasks()

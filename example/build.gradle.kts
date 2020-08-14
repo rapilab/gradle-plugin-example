@@ -20,6 +20,6 @@ phodal {
 }
 
 dependencies {
-//    implementation(kotlin("stdlib-jdk7"))
-//    implementation(gradleApi())
+    implementation(kotlin("stdlib-jdk7"))
+    implementation(gradleApi())
 }
