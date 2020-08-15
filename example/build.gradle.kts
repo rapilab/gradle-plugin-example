@@ -15,7 +15,7 @@ java {
 phodal {
     pConfig {
         message("phodal")
-//        message = "phodal"
+        sdkVersion(12)
     }
 }
 

@@ -16,6 +16,9 @@ class DependencyManager(val project: Project, val extraModelInfo: ExtraModelInfo
         val compileClasspath: Configuration = compile
 
         val artifacts: Map<ModuleVersionIdentifier, List<ResolvedArtifact>> = hashMapOf()
+
+        val deps = project.dependencies
+        println(deps)
     }
 
     private fun collectArtifacts(

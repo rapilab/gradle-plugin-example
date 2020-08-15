@@ -21,3 +21,8 @@ open class PConfig(private val name: String): Named {
         this.mSdkVersion = version
     }
 }
+//
+//class ApiVersion(apiLevel: Int) {
+//    private var mApiLevel: Int = apiLevel
+//
+//}
