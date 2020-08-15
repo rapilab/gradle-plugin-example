@@ -14,6 +14,7 @@ java {
 
 phodal {
     pConfig {
+        applicationId = "com.phodal.gra"
         message("phodal")
         sdkVersion(12)
     }

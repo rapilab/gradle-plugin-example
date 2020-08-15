@@ -5,6 +5,10 @@ import org.gradle.api.tasks.Input
 
 open class PConfig(private val name: String): Named {
     private var mSdkVersion: Int = 0
+
+    @Input
+    var applicationId = ""
+
     private lateinit var mMessage: String
 
     override fun getName(): String {
